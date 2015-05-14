@@ -1,0 +1,30 @@
+{
+  "name": "less-plugin-pattern-import",
+  "version": "0.1.0",
+  "description": "pattern import plugin for less.js",
+  "license": "MIT",
+  "main": "library",
+  "scripts": {
+    "build": "npm run clean && npm run babel",
+    "babel": "babel source --out-dir library",
+    "clean": "rm -rf library"
+  },
+  "keywords": [
+    "less plugins",
+    "pattern import",
+    "less prefixes"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@git.sinnerschrader.com:patternplate/less-plugin-pattern-import.git"
+  },
+  "devDependencies": {
+    "babel": "^5.3.3",
+    "babel-eslint": "^3.1.1",
+    "eslint": "^0.21.0"
+  },
+  "dependencies": {
+    "babel-core": "^5.3.3",
+    "less": "^2.5.0"
+  }
+}
