@@ -33,16 +33,35 @@ function factory(less) {
 		}, {
 			key: 'resolve',
 			value: function resolve(filename) {
+				var _this = this;
+
 				var ext = (0, _path.extname)(filename);
 				var reference = (0, _path.basename)(filename, ext);
 
-				var pattern = this.options.patterns[reference];
+				var patternFile = this.options.patterns[reference];
 
-				if (!pattern) {
+				if (!patternFile) {
 					throw new Error('Can not resolve dependency: ' + reference);
 				}
 
-				return (0, _path.resolve)(pattern);
+				var patternDir = (0, _path.dirname)(patternFile);
+				var manifest = (0, _path.resolve)(patternDir, 'pattern.json');
+				var patternDefinition = undefined;
+
+				try {
+					patternDefinition = Object.assign({}, require(manifest).patterns || {});
+				} catch (err) {
+					err.message = 'Can only resolve to patterns, no valid pattern.json found at ' + patternDir;
+					throw err;
+				}
+
+				var patterns = Object.keys(patternDefinition).reduce(function (result, key) {
+					result[key] = (0, _path.resolve)(_this.options.root, patternDefinition[key], 'index.less');
+					return result;
+				}, {});
+
+				Object.assign(this.options.patterns, patterns);
+				return (0, _path.resolve)(patternFile);
 			}
 		}, {
 			key: 'proxy',

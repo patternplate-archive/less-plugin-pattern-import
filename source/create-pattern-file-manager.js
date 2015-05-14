@@ -1,4 +1,4 @@
-import {resolve, normalize, basename, extname} from 'path';
+import {resolve, normalize, basename, extname, dirname} from 'path';
 
 function factory (less) {
 	class PatternFileManager extends less.FileManager {
@@ -19,13 +19,30 @@ function factory (less) {
 			let ext = extname(filename);
 			let reference = basename(filename, ext);
 
-			let pattern = this.options.patterns[reference];
+			let patternFile = this.options.patterns[reference];
 
-			if (!pattern) {
+			if (!patternFile) {
 				throw new Error(`Can not resolve dependency: ${reference}`);
 			}
 
-			return resolve(pattern);
+			let patternDir = dirname(patternFile);
+			let manifest = resolve(patternDir, 'pattern.json');
+			let patternDefinition;
+
+			try {
+				patternDefinition = Object.assign({}, require(manifest).patterns || {});
+			} catch (err) {
+				err.message = `Can only resolve to patterns, no valid pattern.json found at ${patternDir}`;
+				throw err;
+			}
+
+			let patterns = Object.keys(patternDefinition).reduce((result, key) => {
+				result[key] = resolve(this.options.root, patternDefinition[key], 'index.less');
+				return result;
+			}, {});
+
+			Object.assign(this.options.patterns, patterns);
+			return resolve(patternFile);
 		}
 
 		async proxy (...args) {

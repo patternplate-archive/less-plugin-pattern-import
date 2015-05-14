@@ -6,6 +6,7 @@
   "main": "library",
   "scripts": {
     "build": "npm run clean && npm run babel",
+    "watch": "babel source --out-dir library --watch",
     "babel": "babel source --out-dir library",
     "clean": "rm -rf library"
   },
