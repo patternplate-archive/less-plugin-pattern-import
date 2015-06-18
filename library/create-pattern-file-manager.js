@@ -36,7 +36,7 @@ function factory(less) {
 				var _this = this;
 
 				var ext = (0, _path.extname)(filename);
-				var reference = (0, _path.basename)(filename, ext);
+				var reference = (0, _path.join)((0, _path.dirname)(filename), (0, _path.basename)(filename, ext));
 
 				var patternFile = this.options.patterns[reference];
 

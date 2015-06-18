@@ -1,4 +1,4 @@
-import {resolve, normalize, basename, extname, dirname} from 'path';
+import {resolve, normalize, basename, extname, dirname, join} from 'path';
 
 function factory (less) {
 	class PatternFileManager extends less.FileManager {
@@ -17,7 +17,7 @@ function factory (less) {
 
 		resolve (filename) {
 			let ext = extname(filename);
-			let reference = basename(filename, ext);
+			let reference = join(dirname(filename), basename(filename, ext));
 
 			let patternFile = this.options.patterns[reference];
 

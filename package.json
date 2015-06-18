@@ -1,6 +1,6 @@
 {
   "name": "less-plugin-pattern-import",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "pattern import plugin for less.js",
   "license": "MIT",
   "main": "library",
