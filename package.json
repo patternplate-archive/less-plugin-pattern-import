@@ -10,6 +10,15 @@
     "babel": "babel source --out-dir library",
     "clean": "rm -rf library"
   },
+  "babel": {
+    "presets": [
+      "es2015-node4",
+      "stage-0"
+    ],
+    "plugins": [
+      "add-default-exports"
+    ]
+  },
   "keywords": [
     "less plugins",
     "pattern import",
@@ -20,12 +29,12 @@
     "url": "https://github.com/sinnerschrader/less-plugin-pattern-import.git"
   },
   "devDependencies": {
-    "babel": "^5.3.3",
-    "babel-eslint": "^3.1.1",
-    "eslint": "^0.21.0"
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-preset-es2015-node4": "^2.1.0",
+    "babel-preset-stage-0": "^6.16.0",
+    "less": "^2.7.1"
   },
-  "dependencies": {
-    "babel-core": "^5.3.3",
-    "less": "^2.5.0"
+  "peerDependencies": {
+    "less": "2"
   }
 }
