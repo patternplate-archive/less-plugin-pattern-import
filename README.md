@@ -1,5 +1,7 @@
 less-plugin-pattern-import
 --------------------------
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/sinnerschrader/less-plugin-pattern-import.svg)](https://greenkeeper.io/)
 Limit less imports to a given root directory, preventing relative imports
 
 ## Programmatic usage
