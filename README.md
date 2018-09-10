@@ -1,3 +1,7 @@
+> # ⚠️ Deprecated
+> Use instead: https://patternplate.github.io/
+
+
 less-plugin-pattern-import
 --------------------------
 Limit less imports to a given root directory, preventing relative imports
